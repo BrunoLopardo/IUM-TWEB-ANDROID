@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="project.ium.tweb.ium_tweb_android.utils.Converter"/>
+        <variable
+            name="prenotazione"
+            type="project.ium.tweb.ium_tweb_android.dao.dto.Prenotazione"/>
+    </data>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:background="?android:attr/selectableItemBackground">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/view_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/colorRed">
+
+                <ImageView
+                    android:id="@+id/delete_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_delete" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/delete_icon"
+                    android:text="@string/cancel_text"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="21sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/view_foreground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewCorso"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:layout_margin="0dp"
+                        android:text="@{prenotazione.getCorso().getTitolo()}"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="22sp"/>
+
+                    <TextView
+                        android:id="@+id/textViewCreatedAt"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:layout_margin="0dp"
+                        android:text="@{Converter.convertTimestamp(safeUnbox(prenotazione.createdAt))}"
+                        android:textSize="16sp"
+                        android:gravity="end"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewList2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@{prenotazione.getDocente().getNome() + ' ' + prenotazione.getDocente().getCognome()}"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/textViewList3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:text="@{Converter.convertDay(prenotazione.giorno.toString()) + ' ' + `alle`+ ' ' + Converter.convertHour(safeUnbox(prenotazione.oraInizio))}"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
+</layout>
